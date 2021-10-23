@@ -3,7 +3,7 @@
 
 #include "serial.h"
 #define FOSC 16000000 // Clock Speed
-#define BAUD 38400
+#define BAUD 38400 // Referens från uppgiften
 
 
 

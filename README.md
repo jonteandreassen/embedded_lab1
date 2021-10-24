@@ -1,12 +1,12 @@
 ## 1.4.1 DELUPPGIFT 1: BLINKA LED
-1.[ x ] Läs databladen för tillhandahållen LED och resistorer och räkna ut en lämplig resistorstorlek
-2. Koppla in LED och lämplig resistor till pinne 8 på Arduinons expansionsport med hjälp av
+1.[x] Läs databladen för tillhandahållen LED och resistorer och räkna ut en lämplig resistorstorlek
+2.[x]Koppla in LED och lämplig resistor till pinne 8 på Arduinons expansionsport med hjälp av
     kopplingsdäck och kablar
-3. Använd elschemat för Arduinon för att lista ut vilken port och pinne på ATMegan detmotsvarar
-4. Konfigurera upp pinnen som utgång
-5. Skapa en oändlig loop i main(), och omväxlande tänd/släck LEDen med 500 ms av- respektive
+3.[x] Använd elschemat för Arduinon för att lista ut vilken port och pinne på ATMegan detmotsvarar
+4.[x] Konfigurera upp pinnen som utgång
+5.[x]Skapa en oändlig loop i main(), och omväxlande tänd/släck LEDen med 500 ms av- respektive
     på-tid.
-6. Städa upp din kod och skapa en git-commit med ovanstående och redogör för resistorberäkningen i
+6.[x] Städa upp din kod och skapa en git-commit med ovanstående och redogör för resistorberäkningen i
 commit- meddelandet
 
 ## 1.4.2 DELUPPGIFT 2: KONFIGURERA UPP UART FÖR SÄNDNING (TX)

@@ -5,10 +5,25 @@
 #define FOSC 16000000 // Clock Speed
 #define BAUD 38400 // Referens från uppgiften
 
-
+// KOLLA VAD _BV gör, det står för bitvise, gissar att det är ett macro för att shifta
 
 void uart_init(void){
+    UCSR0B |= _BV(TXEN0); // Sätter på transmitter
+    UCSR0B |= _BV(RXEN0); // Sätter på receivern
+
+    // 8N1 kolla kapitel 24.12.4 
+    UCSR0C |=   _BV(UCSZ01); // Kolla vad dessa gör
+    UCSR0C |=  ~_BV(UCSZ00); 
+
+    UCSR0C &= ~_BV(UPM01); // Kolla dessa
+    UCSR0C &= ~_BV(UPM00);
     
+    UCSR0C &= ~_BV(USBS0); // Kolla
+
+    uint16_t ubrrn = (FOSC/(16*BAUD) -1)
+    UBRR0H = ubrrn & 0xFF00;
+    UBRR0L = ubrrn & 0x00FF;
+    UBRR0 = ubrrn;
 
 }
 /*

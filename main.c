@@ -4,14 +4,13 @@
 
 
 void main (void) {
+// D8 är kopplad til PB0, bit 0 i PORTB registret
+    DDRB |= (1 << PB0); // sätter PB0 till output
 
-/*
-    D8 är kopplad til PB0, bit 0 i PORTB registret
-    Sätter D8 som output genom motsvarande bit i DDRB
+/*   
     Vill man ändra färg på leden så måste man ändra från PB2 i DDRB deklarationen.
     vill man byta färg ändra enligt [PB1 = BLÅ PB2 = GRÖN PB3 = RÖD]
 */
-
  DDRB |= (1 << PB2);
     while(1){
     PORTB |= (1 << PB2); // ORAR in en 1a på "led Biten" i PORTB registret

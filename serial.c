@@ -4,35 +4,24 @@
 #include "serial.h"
 #define FOSC 16000000 // Clock Speed
 #define BAUD 38400 // Referens från uppgiften
-# define ubrrn (FOSC/(16*BAUD) -1)
+
 // KOLLA VAD _BV gör, det står för bitvise, gissar att det är ett macro för att shifta
 
 void uart_init(void){
-    UBRR0H = (ubrrn>>8);
-    UBRR0L = ubrrn;
+    uint16_t ubrrn = FOSC/(16*BAUD) -1;
+    UBRR0H = (ubrrn>>8); // sätter UBRR0H till dem första 8 bitarna
+    UBRR0L = ubrrn; // Sätter UBRR0L till dem sista 4 bitarna
     // Enable receiver and transmitter 
-    UCSR0B = (1<<RXEN0)|(1<<TXEN0);
-    // Set frame format: 8data, 2stop bit */
-    UCSR0C = (1<<USBS0)|(0<<UCSZ00);
-
-
-/* OSCARS EXEMPEL 
-    UCSR0B |= _BV(TXEN0); // Sätter på transmitter
-    UCSR0B |= _BV(RXEN0); // Sätter på receivern
-
-    // 8N1 kolla kapitel 24.12.4 
-    UCSR0C |=   _BV(UCSZ01); // Kolla vad dessa gör
-    UCSR0C |=  ~_BV(UCSZ00); 
-
-    UCSR0C &= ~_BV(UPM01); // UPM är för paritet
-    UCSR0C &= ~_BV(UPM00);
-    
-    UCSR0C &= ~_BV(USBS0); // Kolla
-
-    UBRR0H = ubrrn & 0xFF00;
-    UBRR0L = ubrrn & 0x00FF;
-    UBRR0 = ubrrn;
-*/
+    UCSR0B |= (1<<RXEN0);
+    UCSR0B |= (1<<TXEN0);
+    // 8N1 mode: Kolla datablad 24.12.4 
+    UCSR0C |=  (1<<UCSZ01); // sätter UCSR0C till 8 bitars character size
+    UCSR0C | = (1<<UCSZ00); 
+    // No parity 
+    UCSR0C &= ~(1<<UPM01);
+    UCSR0C &= ~(1<<UPM00);
+    // Sätt 1 stop bit
+    UCSR0c &= ~(1<<USBS0);
 }
 
 

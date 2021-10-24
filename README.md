@@ -1,5 +1,5 @@
 ## 1.4.1 DELUPPGIFT 1: BLINKA LED
-1. Läs databladen för tillhandahållen LED och resistorer och räkna ut en lämplig resistorstorlek
+1.[ x ] Läs databladen för tillhandahållen LED och resistorer och räkna ut en lämplig resistorstorlek
 2. Koppla in LED och lämplig resistor till pinne 8 på Arduinons expansionsport med hjälp av
     kopplingsdäck och kablar
 3. Använd elschemat för Arduinon för att lista ut vilken port och pinne på ATMegan detmotsvarar

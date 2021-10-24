@@ -11,19 +11,19 @@ commit- meddelandet
 
 ## 1.4.2 DELUPPGIFT 2: KONFIGURERA UPP UART FÖR SÄNDNING (TX)
 Samtliga nämnda funktioner deklareras i serial.h och implementeras i serial.c.
-- [] Implementera funktionen uart_init så att den konfigurerar upp USART0 för sändning (TX) enligt 8N1 i 38400 baud.
-- [] Implementera funktionen uart_putchar så att den skickar ett enskilt tecken över USART0, och lägger till tecknet ’\r’     (radretur) om tecknet vi vill skicka är ’\n’ (radbrytning).
-- [] Testa funktionen med hjälp av en serieterminal på din dator — anropa periodiskt uart_putchar från din loop i main.
-- [] Implementera funktionen uart_putstr så att den med hjälp av uart_putchar skriver ut en hel sträng på serieterminalen.
-- [] Visa att funktionen fungerar genom att anropa uart_putstr från main med ditt namn + radbrytning som argument.
-- [] Städa upp din kod och skapa en git-commit med ovanstående förändringar.
+- [ ] Implementera funktionen uart_init så att den konfigurerar upp USART0 för sändning (TX) enligt 8N1 i 38400 baud.
+- [ ] Implementera funktionen uart_putchar så att den skickar ett enskilt tecken över USART0, och lägger till tecknet ’\r’     (radretur) om tecknet vi vill skicka är ’\n’ (radbrytning).
+- [ ] Testa funktionen med hjälp av en serieterminal på din dator — anropa periodiskt uart_putchar från din loop i main.
+- [ ] Implementera funktionen uart_putstr så att den med hjälp av uart_putchar skriver ut en hel sträng på serieterminalen.
+- [ ] Visa att funktionen fungerar genom att anropa uart_putstr från main med ditt namn + radbrytning som argument.
+- [ ] Städa upp din kod och skapa en git-commit med ovanstående förändringar.
 
 ## 1.4.3 DELUPPGIFT 3: KONFIGURERA UPP UART FÖR MOTTAGNING (RX)
-- [] Ändra implementationen av uart_init så att den även medger mottagning (RX).
-- [] Implementera funktionen uart_getchar så att den tar emot ett enskilt tecken.
-- [] Visa att funktionen fungerar genom att implementera uart_echo så att den väntar på ett inkommande tecken med hjälp av uart_getchar,
+- [ ] Ändra implementationen av uart_init så att den även medger mottagning (RX).
+- [ ] Implementera funktionen uart_getchar så att den tar emot ett enskilt tecken.
+- [ ] Visa att funktionen fungerar genom att implementera uart_echo så att den väntar på ett inkommande tecken med hjälp av uart_getchar,
    och direkt skickar tillbaka samma tecken med uart_putchar. Anropa funktionen från main.
-- [] Städa upp din kod och skapa en git-commit med ovanstående förändringar.
+- [ ] Städa upp din kod och skapa en git-commit med ovanstående förändringar.
 
 
 

@@ -5,43 +5,80 @@
 #define FOSC 16000000 // Clock Speed
 #define BAUD 38400 // Referens från uppgiften
 
-// KOLLA VAD _BV gör, det står för bitvise, gissar att det är ett macro för att shifta
 
 void uart_init(void){
     uint16_t ubrrn = FOSC/(16*BAUD) -1;
-    UBRR0H = (ubrrn>>8); // sätter UBRR0H till dem första 8 bitarna
-    UBRR0L = ubrrn; // Sätter UBRR0L till dem sista 4 bitarna
-    // Enable receiver and transmitter 
-    UCSR0B |= (1<<RXEN0);
+    UBRR0H = (ubrrn>>8); // sätter UBRR0H till dem första 8 bitarna (high baud)
+    UBRR0L = ubrrn; // Sätter UBRR0L till dem sista 4 bitarna (low baud)
+
+/* Enable receiver and transmitter */
+    UCSR0B |= (1<<RXEN0); 
     UCSR0B |= (1<<TXEN0);
-    // 8N1 mode: Kolla datablad 24.12.4 
-    UCSR0C |=  (1<<UCSZ01); // sätter UCSR0C till 8 bitars character size
-    UCSR0C | = (1<<UCSZ00); 
-    // No parity 
-    UCSR0C &= ~(1<<UPM01);
-    UCSR0C &= ~(1<<UPM00);
-    // Sätt 1 stop bit
-    UCSR0c &= ~(1<<USBS0);
+
+/* 8N1 mode: sätter UCSZ00 & 01 till en 1a (8 bitars character size)  */
+    UCSR0C |= (1<<UCSZ01); 
+    UCSR0C |= (1<<UCSZ00); 
+    // Sätt 1 stop bit genom att maska in en 0 i USBS0
+    UCSR0C &= ~(1<<USBS0); // maskar in en 0a
+/* No parity */
+    UCSR0C &= ~(1<<UPM01); // maskar in en 0a 
+    UCSR0C &= ~(1<<UPM00); // maskar in en 0a
 }
 
-
-
-
-
-
-/*
+// Kommentera funktionen
 void uart_putchar(char chr){
-
+if(chr =='\n'){
+    while (!(UCSR0A & (1 << UDRE0)));
+    UDR0 = '\r';
+    while (!(UCSR0A & (1 << UDRE0)));
+    UDR0  = '\n';
 }
+else{
+    while (!(UCSR0A & (1 << UDRE0)));
+    UDR0 = chr;
+    }
+}
+
+// Kommentera funktionen
 void uart_putstr(const char *str){
-
-}
-
-char uart_getchar(void){
-
-}
-
-void uart_echo(void){
-    
-}
+/*
+    # Loopar igenom inparamter char pekaren (arrayen)
+    # Så länge inte strängen har en noll terminator skriv ut varje element i arrayen
+      genom uart_putchar() och stega vidare för varje varv.
 */
+int i = 0;
+    while(str[i] !='\0'){
+    uart_putchar(str[i]);
+    i++;
+    }
+}
+// Kommentera funktionen
+char uart_getchar(void){
+char chr;
+    while(!(UCSR0A & (1<<RXC0)));
+    chr = UDR0;
+return chr;
+}
+// Kommentera funktionen
+void uart_echo(void){
+    uart_putchar(uart_getchar());
+}
+
+// Kommentera funktionen
+void uart_getstr(char *buffer){
+int i = 0;
+    buffer[i] = uart_getchar();
+        while((buffer[i] != '\r') & (buffer[i] !='\n')){ 
+        if(i<=47){ // 47 = buffer[50] - \r\n\0
+                i++; 
+                buffer[i] = uart_getchar();
+            }
+        else{
+            buffer[i] = uart_getchar();
+            }
+        }
+    buffer[i] = '\r';
+    i++;
+    buffer[i] = '\n';
+    buffer[i+1] = '\0'; 
+}

@@ -6,7 +6,8 @@ BIN = lab1# namn på output-binären
 SOURCES = \
 		  main.c \
 		  serial.c \
-		  led.c
+		  led.c \
+		  uartLED.c
 
 PORT = /dev/ttyS3 # Arduinons serieport — kan vara ttyACM1, kolla dmesg!
 

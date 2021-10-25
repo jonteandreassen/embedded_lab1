@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
-
 #include "serial.h"
+
 #define FOSC 16000000 // Clock Speed
 #define BAUD 38400 // Referens från uppgiften
 
@@ -12,21 +12,24 @@ void uart_init(void){
     UBRR0L = ubrrn; // Sätter UBRR0L till dem sista 4 bitarna (low baud)
 
 /* Enable receiver and transmitter */
-    UCSR0B |= (1<<RXEN0); 
-    UCSR0B |= (1<<TXEN0);
+    UCSR0B = (1<<RXEN0) | (1<<TXEN0); 
 
 /* 8N1 mode: sätter UCSZ00 & 01 till en 1a (8 bitars character size)  */
-    UCSR0C |= (1<<UCSZ01); 
-    UCSR0C |= (1<<UCSZ00); 
-    // Sätt 1 stop bit genom att maska in en 0 i USBS0
+    UCSR0C = (1<<UCSZ01)|(1<<UCSZ00); 
+
+// Sätt 1 stop bit genom att maska in en 0 i USBS0
     UCSR0C &= ~(1<<USBS0); // maskar in en 0a
 /* No parity */
     UCSR0C &= ~(1<<UPM01); // maskar in en 0a 
     UCSR0C &= ~(1<<UPM00); // maskar in en 0a
 }
 
-// Kommentera funktionen
+
 void uart_putchar(char chr){
+/* 
+    Om chr == '\n' så sätt radbryte 
+    UDR0 sätts till '\r'
+*/
 if(chr =='\n'){
     while (!(UCSR0A & (1 << UDRE0)));
     UDR0 = '\r';
@@ -59,7 +62,7 @@ char chr;
     chr = UDR0;
 return chr;
 }
-// Kommentera funktionen
+
 void uart_echo(void){
     uart_putchar(uart_getchar());
 }
@@ -68,10 +71,10 @@ void uart_echo(void){
 void uart_getstr(char *buffer){
 int i = 0;
     buffer[i] = uart_getchar();
-        while((buffer[i] != '\r') & (buffer[i] !='\n')){ 
+    while((buffer[i] != '\r') & (buffer[i] !='\n')){ 
         if(i<=47){ // 47 = buffer[50] - \r\n\0
-                i++; 
-                buffer[i] = uart_getchar();
+            i++; 
+            buffer[i] = uart_getchar();
             }
         else{
             buffer[i] = uart_getchar();

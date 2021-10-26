@@ -13,18 +13,18 @@ Samtliga nämnda funktioner deklareras i serial.h och implementeras i serial.c.
 - [x] 3. Testa funktionen med hjälp av en serieterminal på din dator — anropa periodiskt uart_putchar från din loop i main.
 - [x] 4. Implementera funktionen uart_putstr så att den med hjälp av uart_putchar skriver ut en hel sträng på serieterminalen.
 - [x] 5. Visa att funktionen fungerar genom att anropa uart_putstr från main med ditt namn + radbrytning som argument.
-- [-] 6. Städa upp din kod och skapa en git-commit med ovanstående förändringar.
+- [x] 6. Städa upp din kod och skapa en git-commit med ovanstående förändringar.
 
 ## 1.4.3 DELUPPGIFT 3: KONFIGURERA UPP UART FÖR MOTTAGNING (RX)
 - [x] 1. Ändra implementationen av uart_init så att den även medger mottagning (RX).
 - [x] 2. Implementera funktionen uart_getchar så att den tar emot ett enskilt tecken.
 - [x] 3. Visa att funktionen fungerar genom att implementera uart_echo så att den väntar på ett inkommande tecken med hjälp av uart_getchar,
       och direkt skickar tillbaka samma tecken med uart_putchar. Anropa funktionen från main.
-- [-] 4. Städa upp din kod och skapa en git-commit med ovanstående förändringar.
+- [x] 4. Städa upp din kod och skapa en git-commit med ovanstående förändringar.
 
 ## 1.4.4 DELUPPGIFT 4 (VG-KRAV): STYR LED VIA UART
-- [-] 1. Deklarera, implementera, och kommentera en funktion som via UART tar emot strängarna ’ON\r\n’ och ’OFF\r\n’ och tänder respektive släcker en LED (samma som ovan, en ny på godtycklig pinne, eller den inbyggda på pinne 13).
-- [-] 2. Städa upp och skapa en git-commit med ovanstående förändring. Dokumentera beteendet och vilken pinne LEDen förväntas sitta på.
+- [x] 1. Deklarera, implementera, och kommentera en funktion som via UART tar emot strängarna ’ON\r\n’ och ’OFF\r\n’ och tänder respektive släcker en LED (samma som ovan, en ny på godtycklig pinne, eller den inbyggda på pinne 13).
+- [x] 2. Städa upp och skapa en git-commit med ovanstående förändring. Dokumentera beteendet och vilken pinne LEDen förväntas sitta på.
 
 Embedded systems &amp; Design Jonathan Andreassen
 

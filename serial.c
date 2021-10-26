@@ -42,7 +42,7 @@ else{
     }
 }
 
-// Kommentera funktionen
+
 void uart_putstr(const char *str){
 /*
     # Loopar igenom inparamter char pekaren (arrayen)
@@ -67,7 +67,7 @@ void uart_echo(void){
     uart_putchar(uart_getchar());
 }
 
-// Kommentera funktionen
+
 void uart_getstr(char *buffer){
 int i = 0;
     buffer[i] = uart_getchar();
@@ -80,8 +80,8 @@ int i = 0;
             buffer[i] = uart_getchar();
             }
         }
-    buffer[i] = '\r';
+    buffer[i] = '\r'; // lägger till på slutet av buffer
     i++;
-    buffer[i] = '\n';
-    buffer[i+1] = '\0'; 
+    buffer[i] = '\n'; // lägger till på slutet av buffer
+    buffer[i+1] = '\0'; // lägger till efter \n\r
 }

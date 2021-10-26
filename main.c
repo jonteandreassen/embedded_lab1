@@ -5,7 +5,7 @@
 #include <util/delay.h>
 
 
-void main (void) {
+int main (void) {
 // D8 är kopplad til PB0, bit 0 i PORTB registret
     DDRB |= (1 << PB0); // sätter PB0 till output
 
@@ -27,8 +27,7 @@ void main (void) {
         uart_putstr(buffer);
         uartLED(buffer);
 
-        //_delay_ms(500);
-
+        //_delay_ms(500);    
     }
-    
+    return 0;
 }

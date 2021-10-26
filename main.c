@@ -4,6 +4,7 @@
 #include "uartLED.h"
 #include <util/delay.h>
 
+#include <string.h> 
 
 int main (void) {
 // D8 är kopplad til PB0, bit 0 i PORTB registret
@@ -11,9 +12,9 @@ int main (void) {
 
     //blink();
     char buffer[50]; // buffer array för indata
-    //const char *test = "Jonte Andreassen\n";
+    //char *test = "Jonte Andreassen\n";
     uart_init();
-   
+    
     while(1){
         /* TX */ 
         //uart_putchar('\n');   // gör ett radbryte för beroende på hastigheten i _delay_ms()
@@ -26,7 +27,8 @@ int main (void) {
         uart_getstr(buffer);
         uart_putstr(buffer);
         uartLED(buffer);
-
+    
+        
         //_delay_ms(500);    
     }
     return 0;

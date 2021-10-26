@@ -30,16 +30,11 @@ void uart_putchar(char chr){
     Om chr == '\n' så sätt radbryte 
     UDR0 sätts till '\r'
 */
-if(chr =='\n'){
-    while (!(UCSR0A & (1 << UDRE0)));
-    UDR0 = '\r';
-    while (!(UCSR0A & (1 << UDRE0)));
-    UDR0  = '\n';
-}
-else{
-    while (!(UCSR0A & (1 << UDRE0)));
-    UDR0 = chr;
+while (!(UCSR0A & (1 << UDRE0))){}
+    if(chr == '\n'){
+        UDR0 = '\r';
     }
+    UDR0 = chr; 
 }
 
 
@@ -55,6 +50,8 @@ int i = 0;
     i++;
     }
 }
+
+
 // Kommentera funktionen
 char uart_getchar(void){
 char chr;
@@ -68,18 +65,19 @@ void uart_echo(void){
 }
 
 
+
 void uart_getstr(char *buffer){
 int i = 0;
     buffer[i] = uart_getchar();
     while((buffer[i] != '\r') & (buffer[i] !='\n')){ 
         if(i<=47){ // 47 = buffer[50] - \r\n\0
-            i++; 
-            buffer[i] = uart_getchar();
-            }
-        else{
-            buffer[i] = uart_getchar();
-            }
+        i++; 
+        buffer[i] = uart_getchar();
         }
+        else{
+        buffer[i] = uart_getchar();
+        }
+    }
     buffer[i] = '\r'; // lägger till på slutet av buffer
     i++;
     buffer[i] = '\n'; // lägger till på slutet av buffer

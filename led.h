@@ -2,5 +2,5 @@
 #define LED_H_
 
 void blink(void);
-void uartLED(char *buffer);
+
 #endif

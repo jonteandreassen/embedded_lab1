@@ -30,13 +30,24 @@ void uart_putchar(char chr){
     Om chr == '\n' så sätt radbryte 
     UDR0 sätts till '\r'
 */
-while (!(UCSR0A & (1 << UDRE0))){}
-    if(chr == '\n'){
+if(chr =='\n'){
+    while (!(UCSR0A & (1 << UDRE0)));
         UDR0 = '\r';
+            while (!(UCSR0A & (1 << UDRE0)));
+            UDR0  = '\n';
     }
-    UDR0 = chr; 
+    else{
+        while (!(UCSR0A & (1 << UDRE0)));
+        UDR0 = chr;
+    }
 }
-
+// returnerar chr från buffern
+char uart_getchar(void){
+char chr;
+    while(!(UCSR0A & (1<<RXC0)));
+    chr = UDR0;
+return chr;
+}
 
 void uart_putstr(const char *str){
 /*
@@ -51,35 +62,9 @@ int i = 0;
     }
 }
 
-
-// Kommentera funktionen
-char uart_getchar(void){
-char chr;
-    while(!(UCSR0A & (1<<RXC0)));
-    chr = UDR0;
-return chr;
-}
-
+// kör funktionen putchar med getchar som inparameter för att 
+// returnera samma char man skickar till serial.
 void uart_echo(void){
     uart_putchar(uart_getchar());
 }
 
-
-
-void uart_getstr(char *buffer){
-int i = 0;
-    buffer[i] = uart_getchar();
-    while((buffer[i] != '\r') & (buffer[i] !='\n')){ 
-        if(i<=47){ // 47 = buffer[50] - \r\n\0
-        i++; 
-        buffer[i] = uart_getchar();
-        }
-        else{
-        buffer[i] = uart_getchar();
-        }
-    }
-    buffer[i] = '\r'; // lägger till på slutet av buffer
-    i++;
-    buffer[i] = '\n'; // lägger till på slutet av buffer
-    buffer[i+1] = '\0'; // lägger till efter \n\r
-}

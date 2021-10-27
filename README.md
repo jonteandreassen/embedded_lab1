@@ -22,9 +22,7 @@ Samtliga nämnda funktioner deklareras i serial.h och implementeras i serial.c.
       och direkt skickar tillbaka samma tecken med uart_putchar. Anropa funktionen från main.
 - [x] 4. Städa upp din kod och skapa en git-commit med ovanstående förändringar.
 
-## 1.4.4 DELUPPGIFT 4 (VG-KRAV): STYR LED VIA UART
-- [x] 1. Deklarera, implementera, och kommentera en funktion som via UART tar emot strängarna ’ON\r\n’ och ’OFF\r\n’ och tänder respektive släcker en LED (samma som ovan, en ny på godtycklig pinne, eller den inbyggda på pinne 13).
-- [x] 2. Städa upp och skapa en git-commit med ovanstående förändring. Dokumentera beteendet och vilken pinne LEDen förväntas sitta på.
+
 
 Embedded systems &amp; Design Jonathan Andreassen
 
